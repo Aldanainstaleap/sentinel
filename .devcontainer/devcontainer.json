@@ -1,0 +1,110 @@
+{
+  "name": "sentinel DevContainer for Codespace",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "sentinel-debug",
+  "workspaceFolder": "/var/www",
+  "shutdownAction": "stopCompose",
+  "runServices": [
+    "sentinel-debug"
+  ],
+  "overrideCommand": false,
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:latest": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:latest": {},
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-from-docker:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/aws-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installSudo": true,
+      "installZsh": false,
+      "upgradePackages": true,
+      "username": "root"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.watcherExclude": {
+          "**/node_modules/**": true,
+          "**/.git/**": true,
+          "**/dist/**": true,
+          "**/build/**": true
+        },
+        "search.exclude": {
+          "**/node_modules": true,
+          "**/dist": true,
+          "**/build": true
+        },
+        "files.autoSave": "off",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      },
+      "extensions": [
+        "saoudrizwan.claude-dev",
+        "usernamehw.errorlens",
+        "PKief.material-icon-theme",
+        "MS-CEINTL.vscode-language-pack-es",
+        "ms-vsliveshare.vsliveshare",
+        "GitHub.vscode-github-actions",
+        "GitHub.copilot",
+        "miclo.sort-typescript-imports",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "pflannery.vscode-versionlens"
+      ]
+    }
+  },
+  "secrets": {
+    "NPM_TOKEN": {},
+    "AUTH_CONFIG": {},
+    "DB_CONFIG": {},
+    "CORS_CONFIG": {},
+    "SSH_PRIVATE_KEY": {}
+  },
+  "remoteEnv": {
+    "NPM_TOKEN": "${ secrets:NPM_TOKEN }",
+    "AUTH_CONFIG": "${secrets:AUTH_CONFIG}",
+    "DB_CONFIG": "${secrets:DB_CONFIG}",
+    "CORS_CONFIG": "${secrets:CORS_CONFIG}",
+    "SSH_PRIVATE_KEY": "${secrets:SSH_PRIVATE_KEY}"
+  },
+  "initializeCommand": "touch .env && docker network create sentinel-network || true",
+  "postCreateCommand": "bash /var/www/scripts/post-create-codespace.sh",
+  "forwardPorts": [
+    3000,
+    9230
+  ],
+  "portsAttributes": {
+    "3000": {
+      "label": "Application Port",
+      "onAutoForward": "notify",
+      "requireLocalPort": true,
+      "protocol": "http",
+      "visibility": "public"
+    },
+    "25432": {
+      "label": "PostgreSQL Main DB",
+      "visibility": "public",
+      "onAutoForward": "ignore"
+    }
+  }
+}

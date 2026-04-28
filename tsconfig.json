@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "module":"commonjs",
+    "moduleResolution":"node",
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "target": "ES2024",
+    "resolveJsonModule":true,
+    "types": ["vitest/globals"],
+    "lib": ["es2024", "es2015.iterable", "webworker"]
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".history"
+  ],
+  "include": [
+    "src/**/*",
+    "test/**/*"
+  ]
+}

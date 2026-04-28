@@ -1,0 +1,17 @@
+# This Dockerfile is used for debugging purposes, it does not include any COPY commands or
+# build steps, and is intended to be used with a mounted volume for the application code.
+FROM public.ecr.aws/docker/library/node:22-slim
+
+# Set the working directory
+WORKDIR /var/www
+
+# Copy the minimum required files
+COPY package.json package-lock.json .npmrc ./
+
+# Build the project with proper rebuild for native modules
+# Rebuild the better-sqlite3 library to avoid conflicts
+RUN --mount=type=secret,id=npmtoken,target=/run/secrets/npmtoken \
+    export NPM_TOKEN=$(cat /run/secrets/npmtoken) && npm ci --ignore-scripts
+
+# Run container without doing anything else
+CMD ["tail", "-f", "/dev/null"]

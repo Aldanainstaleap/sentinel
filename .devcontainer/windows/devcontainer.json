@@ -1,0 +1,78 @@
+{
+  "name": "sentinel DevContainer for Windows",
+  "dockerComposeFile": ["../../docker-compose.yml"],
+  "service": "sentinel-debug",
+  "workspaceFolder": "/var/www",
+  "shutdownAction": "stopCompose",
+  "runServices": ["sentinel-debug", "sentinel-postgres"],
+  "overrideCommand": false,
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:latest": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:latest": {},
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-from-docker:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/aws-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installSudo": true,
+      "installZsh": false,
+      "upgradePackages": false,
+      "username": "root"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.watcherExclude": {
+          "**/node_modules/**": true,
+          "**/.git/**": true,
+          "**/dist/**": true,
+          "**/build/**": true
+        },
+        "search.exclude": {
+          "**/node_modules": true,
+          "**/dist": true,
+          "**/build": true
+        },
+        "files.autoSave": "off",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      },
+      "extensions": [
+        "saoudrizwan.claude-dev",
+        "usernamehw.errorlens",
+        "PKief.material-icon-theme",
+        "MS-CEINTL.vscode-language-pack-es",
+        "ms-vsliveshare.vsliveshare",
+        "GitHub.vscode-github-actions",
+        "GitHub.copilot",
+        "miclo.sort-typescript-imports",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "pflannery.vscode-versionlens"
+      ]
+    }
+  },
+  "initializeCommand": "docker network inspect sentinel-network > NUL 2>&1 || docker network create sentinel-network",
+  "postCreateCommand": "bash /var/www/scripts/post-create-common.sh",
+  "forwardPorts": [
+    3000,
+    9229
+  ]
+}

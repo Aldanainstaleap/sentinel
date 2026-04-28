@@ -1,0 +1,74 @@
+version: '3'  
+services:
+  sentinel-postgres:
+    image: postgres:14-alpine
+    container_name: sentinel-postgres
+    ports:
+      - '25432:25432'
+    environment:
+      - POSTGRES_USER=sentinel
+      - POSTGRES_PASSWORD=unacontrasenadificil
+      - POSTGRES_DB=sentinel
+    volumes:
+      - 'sentinel_postgres_data:/var/lib/postgresql/data'
+    command:
+      - '-p 25432'
+    networks:
+      - sentinel-network
+  
+  sentinel-debug:
+    image: 'local/sentinel-debug:latest'
+    build:
+      context: .
+      dockerfile: Dockerfile.debug
+      secrets:
+        - npmtoken
+    env_file:
+      - .env
+    container_name: sentinel-debug
+    environment:
+      - PORT=3000
+      - DB_CONFIG={"username":"sentinel","host":"sentinel-postgres","engine":"postgres","password":"unacontrasenadificil","port":25432}
+      - REDIS_CONFIG={"host":"sentinel-redis","port":6379}
+    ports:
+      - '3000:3000'
+      - '9229:9229'
+    volumes:
+      - .:/var/www
+      - node_modules_sentinel:/var/www/node_modules
+      - ~/.ssh:/root/.ssh:rw
+      - ~/.aws:/root/.aws:rw
+    command: npx ts-node-dev --inspect=0.0.0.0:9229 --poll --respawn --transpile-only --exit-child src/app.ts
+    depends_on:
+      - sentinel-postgres
+      - sentinel-redis
+    networks:
+      - sentinel-network
+  
+  sentinel-redis:
+    image: redis:7-alpine
+    container_name: sentinel-redis
+    ports:
+      - '6380:6379'
+    volumes:
+      - sentinel_redis_data:/data
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - sentinel-network
+
+secrets:
+  npmtoken:
+    environment: NPM_TOKEN
+
+volumes:
+  sentinel_postgres_data:
+  node_modules_sentinel:
+  sentinel_redis_data:
+networks:
+  sentinel-network:
