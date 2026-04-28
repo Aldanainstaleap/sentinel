@@ -24,9 +24,10 @@
 ---
 
 <a name="español"></a>
+
 ## 🇪🇸 Sentinel — Gateway API
 
-> *"Ninguna petición pasa sin ser vigilada."*
+> _"Ninguna petición pasa sin ser vigilada."_
 
 **Sentinel** es un microservicio **API Gateway** diseñado para ser el único punto de entrada a tu ecosistema de servicios. Basado en la plantilla **Skrull** y con la lógica de enrutamiento heredada de **Coulson**, Sentinel combina arquitectura limpia con funcionalidad probada en producción.
 
@@ -70,20 +71,20 @@ docker-compose up
 
 ### 🗺️ Servicios soportados
 
-| Servicio | Estrategia | Auth |
-|----------|-----------|------|
-| **Nexus** | `REBUILD_JWT` | Auth0 M2M |
-| **Lola** | `REBUILD_JWT` | Auth0 M2M |
-| **Kingpin** | `REBUILD_JWT` | Auth0 M2M |
-| **Tesseract** | `PASSTHROUGH` | Token del cliente |
-| **Antman** | `PASSTHROUGH` | Token del cliente |
-| **Deadpool** | `PASSTHROUGH` | Token del cliente |
-| **Cerberus** | `PASSTHROUGH` | Token del cliente |
-| **Redbook** | `SERVICE_TOKEN` | API Tenants |
-| **Bifrost** | `SERVICE_TOKEN` | AWS Secrets |
-| **Nebula** | `SERVICE_TOKEN` | AWS Secrets |
-| **Dormammu** | `SERVICE_TOKEN` | Token estático |
-| **Hawkeye** | `SERVICE_TOKEN` | AWS Secrets |
+| Servicio      | Estrategia      | Auth              |
+| ------------- | --------------- | ----------------- |
+| **Nexus**     | `REBUILD_JWT`   | Auth0 M2M         |
+| **Lola**      | `REBUILD_JWT`   | Auth0 M2M         |
+| **Kingpin**   | `REBUILD_JWT`   | Auth0 M2M         |
+| **Tesseract** | `PASSTHROUGH`   | Token del cliente |
+| **Antman**    | `PASSTHROUGH`   | Token del cliente |
+| **Deadpool**  | `PASSTHROUGH`   | Token del cliente |
+| **Cerberus**  | `PASSTHROUGH`   | Token del cliente |
+| **Redbook**   | `SERVICE_TOKEN` | API Tenants       |
+| **Bifrost**   | `SERVICE_TOKEN` | AWS Secrets       |
+| **Nebula**    | `SERVICE_TOKEN` | AWS Secrets       |
+| **Dormammu**  | `SERVICE_TOKEN` | Token estático    |
+| **Hawkeye**   | `SERVICE_TOKEN` | AWS Secrets       |
 
 ### 🏛️ Arquitectura
 
@@ -111,14 +112,15 @@ npm run test -- --coverage
 
 ### 📝 Licencia
 
-ISC © Aldanainstaleap
+ISC
 
 ---
 
 <a name="english"></a>
+
 ## 🇺🇸 Sentinel — API Gateway
 
-> *"No request goes unwatched."*
+> _"No request goes unwatched."_
 
 **Sentinel** is an **API Gateway** microservice designed to be the single entry point to your service ecosystem. Built on the **Skrull** template and carrying the routing logic inherited from **Coulson**, Sentinel combines clean architecture with battle-tested production functionality.
 
@@ -162,20 +164,20 @@ docker-compose up
 
 ### 🗺️ Supported services
 
-| Service | Strategy | Auth |
-|---------|----------|------|
-| **Nexus** | `REBUILD_JWT` | Auth0 M2M |
-| **Lola** | `REBUILD_JWT` | Auth0 M2M |
-| **Kingpin** | `REBUILD_JWT` | Auth0 M2M |
-| **Tesseract** | `PASSTHROUGH` | Client token |
-| **Antman** | `PASSTHROUGH` | Client token |
-| **Deadpool** | `PASSTHROUGH` | Client token |
-| **Cerberus** | `PASSTHROUGH` | Client token |
-| **Redbook** | `SERVICE_TOKEN` | API Tenants |
-| **Bifrost** | `SERVICE_TOKEN` | AWS Secrets |
-| **Nebula** | `SERVICE_TOKEN` | AWS Secrets |
-| **Dormammu** | `SERVICE_TOKEN` | Static token |
-| **Hawkeye** | `SERVICE_TOKEN` | AWS Secrets |
+| Service       | Strategy        | Auth         |
+| ------------- | --------------- | ------------ |
+| **Nexus**     | `REBUILD_JWT`   | Auth0 M2M    |
+| **Lola**      | `REBUILD_JWT`   | Auth0 M2M    |
+| **Kingpin**   | `REBUILD_JWT`   | Auth0 M2M    |
+| **Tesseract** | `PASSTHROUGH`   | Client token |
+| **Antman**    | `PASSTHROUGH`   | Client token |
+| **Deadpool**  | `PASSTHROUGH`   | Client token |
+| **Cerberus**  | `PASSTHROUGH`   | Client token |
+| **Redbook**   | `SERVICE_TOKEN` | API Tenants  |
+| **Bifrost**   | `SERVICE_TOKEN` | AWS Secrets  |
+| **Nebula**    | `SERVICE_TOKEN` | AWS Secrets  |
+| **Dormammu**  | `SERVICE_TOKEN` | Static token |
+| **Hawkeye**   | `SERVICE_TOKEN` | AWS Secrets  |
 
 ### 🏛️ Architecture
 
@@ -203,10 +205,4 @@ npm run test -- --coverage
 
 ### 📝 License
 
-ISC © Aldanainstaleap
-
----
-
-<p align="center">
-  <sub>Built with 🦾 by the Aldanainstaleap team</sub>
-</p>
+ISC
